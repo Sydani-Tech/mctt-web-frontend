@@ -50,6 +50,23 @@ export interface InfluencerOrOpinionLeader {
 }
 
 export interface DemographicData {
+  name: string;
+  ownership: string;
+  state_of_the_health_facility: string;
+  type_of_facility: string;
+  no_of_children_vaccinated: string;
+  no_of_fixed_sessions_conducted: string;
+  no_of_outreach_sessions_conducted: string;
+  no_of_teams_deployed: string;
+  no_of_vaccinators: string;
+  how_many_household_members_are_above_18: string;
+  no_of_campaigns_conducted: string;
+  no_of_supervisory_visits_conducted: string;
+  no_of_cold_chain_equipment: string;
+  no_of_vaccines_requested: string;
+  no_of_vaccines_supplied: string;
+  no_of_vaccines_utilized: string;
+
   community: string;
   nameOfAttendingVillages: string;
   nameOfVillageHead: string;

@@ -12,12 +12,15 @@ import { GiMushroomHouse } from "react-icons/gi";
 import { useHouseHolds } from "../context/HouseHoldsContext";
 import { useAuth } from "../context/AuthContext";
 import { UserTypeEnum } from "@/types/enum";
+import { useFacilities } from "@/hooks/hooks";
 
 const Dashboard = () => {
   const { demographicData } = useDemo();
   const { houseHolds } = useHouseHolds();
   const { user } = useAuth();
 
+  const { data } = useFacilities();
+  console.log(data);
   const formData = [
     {
       name: "Household",
@@ -25,15 +28,15 @@ const Dashboard = () => {
       submissions: houseHolds?.length || 0,
       icon: <GiMushroomHouse color="#0d47a1" />,
       linkTo: "/house-holds",
-      userTypes: UserTypeEnum.ENUMERATOR,
+      userTypes: UserTypeEnum.OIC,
     },
     {
-      name: "Demographics",
-      text: "Collect information from villagers about their demographic information",
+      name: "HEALTH FACILITY",
+      text: "Collect information for health facility.",
       submissions: demographicData?.length || 0,
       icon: <img src={Demographics} alt="demographics" />,
       linkTo: "/demographics",
-      userTypes: UserTypeEnum.OIC,
+      userTypes: [UserTypeEnum.ENUMERATOR, UserTypeEnum.DESK_USER],
     },
     {
       name: "Problem and challenges",
@@ -69,9 +72,16 @@ const Dashboard = () => {
     },
   ];
 
-  const visibleForms = formData.filter((form) =>
-    form.userTypes.includes(user?.userType || "")
-  );
+  const visibleForms = formData.filter((form) => {
+    const roles = user?.user?.roles || [];
+    const allowedRoles = Array.isArray(form.userTypes)
+      ? form.userTypes
+      : [form.userTypes];
+
+    return roles.some((role) => allowedRoles.includes(role as UserTypeEnum));
+  });
+  // console.log(visibleForms);
+  // console.log(user?.user?.roles);
 
   const stats = [
     {

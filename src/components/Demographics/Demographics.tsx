@@ -23,9 +23,12 @@ const Demographics = () => {
   const { demographicData: data } = useDemo();
   const filteredData =
     filter === "all" ? data : data.filter((item) => item.status === filter);
+  console.log(data);
   return (
     <PageLayout>
-      <AuthWrapper allowedTypes={[UserTypeEnum.OIC]}>
+      <AuthWrapper
+        allowedTypes={[UserTypeEnum.ENUMERATOR, UserTypeEnum.DESK_USER]}
+      >
         <div className="w-full gap-14 flex flex-col pb-16">
           <div className="flex flex-col gap-6">
             <div
@@ -34,16 +37,18 @@ const Demographics = () => {
             >
               <img src={ArrowLeft} alt="arrow-left" />
               <span className="text-main leading-none tracking-[0.02em] text-base lg:text-[18px]">
-                Demographics
+                Health facilities
               </span>
             </div>
             <div className="shadow-main p-[30px] flex flex-col gap-[30px] rounded-xl">
               <span className="text-sm lg:text-[18px] text-[#333333] leading-[24px]">
-                Collect information from villagers to build a clearer picture of
-                their community. The data should focus on key demographic
-                details such as age, gender, marital status, and other personal
-                identifiers. Include household size to ensure the records
-                provide a well-rounded view of the population.
+                Collect information at the health facility level to better
+                understand community health conditions. Gather detailed
+                demographic information from villagers, including age, gender,
+                marital status, and other personal identifiers. Also, include
+                household size and related data to provide a well-rounded view
+                of the population and enhance decision-making for healthcare
+                planning.
               </span>
               <div className="flex  flex-col md:flex-row gap-6 md:gap-10 w-full items-center">
                 <div className="flex flex-row gap-6 md:gap-10 w-full lg:w-1/2 items-center">
@@ -105,7 +110,7 @@ const Demographics = () => {
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center md:items-start justify-between md:justify-start">
                         <div className="text-base truncate flex gap-1 lg:text-[18px] font-medium leading-none tracking-[0.02em]">
-                          <span>{user?.phu} </span>
+                          <span>{user?.full_name} </span>
                           <span
                             className={cn(
                               "py-0.5 px-2.5 md:block hidden rounded-[24px] capitalize text-xs",
@@ -138,7 +143,7 @@ const Demographics = () => {
                         <div className="flex text-gray-700 truncate items-center flex gap-1">
                           <CiLocationOn />
 
-                          <span className="text-nowrap">{item.community}</span>
+                          <span className="text-nowrap">{item.name}</span>
                         </div>
                       </div>
                       <span className="text-[#33333380] pt-2 text-sm">

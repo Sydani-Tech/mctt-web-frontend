@@ -16,6 +16,7 @@ type CustomSelectProps = {
   onChange: (value: string) => void;
   options: { label: string; value: string }[];
   disabled?: boolean;
+  className?: string;
 };
 
 const CustomSelect = ({
@@ -25,6 +26,7 @@ const CustomSelect = ({
   value,
   onChange,
   options,
+  className = "",
   disabled = false,
 }: CustomSelectProps) => {
   return (
@@ -36,7 +38,7 @@ const CustomSelect = ({
         <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className={` ${className}`}>
           <SelectGroup>
             {options.map((opt) => (
               <SelectItem key={opt.value} value={opt.value}>

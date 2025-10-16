@@ -1,7 +1,7 @@
 import { apiRequest } from "@/utils/apiRequest";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const USER_DETAILS = "user-details";
+export const USER_DETAILS = "user-details-mcct";
 
 export const useUser = () => {
   return useQuery({
