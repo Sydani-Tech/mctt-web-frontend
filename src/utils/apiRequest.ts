@@ -67,7 +67,8 @@ export async function apiRequest<T = any>({
       ? `token ${userData.user.api_key}:${userData.user.api_secret}`
       : "";
 
-  const url = `${BaseURL}${path}`;
+  const url = `https://slmctt.sydani.org${path}`;
+  // const url = `${BaseURL}${path}`;
   const isFormData = data instanceof FormData;
 
   const finalHeaders: HeadersInit = {
