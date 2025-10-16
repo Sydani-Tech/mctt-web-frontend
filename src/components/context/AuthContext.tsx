@@ -5,12 +5,22 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { createContext, useContext } from "react";
 
+export interface UserDetails {
+  api_key: string;
+  api_secret: string;
+  username: string;
+  email: string;
+  roles: string[];
+  phone: string | null;
+  user_image: string | null;
+}
 export interface User {
   id: number;
   userId: number;
   email: string;
   profilePicture: string;
   fullName: string;
+  full_name: string;
   userType: UserTypeEnum;
   community?: string;
   phoneNumber: string;
@@ -18,6 +28,10 @@ export interface User {
   chiefdom?: string;
   district?: string;
   phu?: string;
+  message: string;
+  home_page: string;
+  status: number;
+  user?: UserDetails;
 }
 
 interface AuthContextType {

@@ -1,11 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
+import { useFacilities } from "@/hooks/hooks";
 import type { ILocation } from "@/typings/app.types";
 import { useState, useEffect, createContext, useContext } from "react";
 import type { ReactNode } from "react";
-
+type IFacility = {
+  name: string;
+  name_of_phu: string;
+};
 interface AppContextType {
   locationData: ILocation;
   setLocationData: React.Dispatch<React.SetStateAction<ILocation>>;
+  // setFacilities: React.Dispatch<React.SetStateAction<IFacility[]>>;
+  facilities: IFacility[];
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -24,6 +30,7 @@ interface AppProviderProps {
 
 export function AppProvider({ children }: AppProviderProps) {
   const [locationData, setLocationData] = useState<ILocation>({});
+  const { data } = useFacilities();
 
   useEffect(() => {
     const storedData = localStorage.getItem("locationData");
@@ -43,6 +50,7 @@ export function AppProvider({ children }: AppProviderProps) {
   const value: AppContextType = {
     locationData,
     setLocationData,
+    facilities: data?.facilities || [],
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

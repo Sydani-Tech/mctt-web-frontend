@@ -11,7 +11,7 @@ const Header = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { mutate: logout, isPending } = useLogout();
   const { user, setUser } = useAuth();
-  const firstName = user?.fullName.split(" ")[0];
+  const firstName = user?.full_name.split(" ")[0];
   const isOnline = useOnlineStatus();
   const handleSync = () => {
     setRefreshing(true);
@@ -35,7 +35,7 @@ const Header = () => {
           <div className="md:hidden flex text-gray-700 truncate items-center flex gap-1">
             <MdOutlineHealthAndSafety className="text-main" />
             <div className="text-sm flex items-center">
-              <span className="text-nowrap">{user?.phu}</span>
+              {/* <span className="text-nowrap">{user?.phu}</span> */}
             </div>
           </div>
           <div className="md:block hidden space-y-1">
@@ -45,7 +45,7 @@ const Header = () => {
             <div className="flex text-gray-700 truncate items-center flex gap-1">
               <MdOutlineHealthAndSafety className="text-main" />
               <div className="text-sm flex items-center">
-                <span className="text-nowrap">{user?.phu}</span>
+                {/* <span className="text-nowrap">{user?.phu}</span> */}
               </div>
             </div>
           </div>

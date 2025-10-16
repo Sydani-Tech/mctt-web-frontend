@@ -1,5 +1,6 @@
 export enum UserTypeEnum {
-  ENUMERATOR = "field_agent",
+  ENUMERATOR = "Enumerator",
+  DESK_USER = "Desk User",
   OIC = "oic",
   EPI = "epi",
   ADMIN = "admin",

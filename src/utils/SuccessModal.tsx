@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import SuccessDone from "@/assets/done-img.svg";
 import { useNavigate } from "react-router";
@@ -12,7 +13,6 @@ interface SuccessModalProps {
 export default function SuccessModal({
   isOpen,
   onClose,
-  successType,
   linkTo,
 }: SuccessModalProps) {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function SuccessModal({
                   onClick={handleClose}
                   className="uppercase gap-2 w-full text-center flex items-center justify-center px-4 py-3 bg-main text-[#F5F5F5] font-bold rounded-lg hover:cursor-pointer hover:bg-main/80 transition duration-300"
                 >
-                  Back to {successType}
+                  Back
                 </button>
               </div>
             </div>

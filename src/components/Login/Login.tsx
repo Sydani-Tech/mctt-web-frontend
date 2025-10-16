@@ -5,13 +5,17 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import LockIcon from "@/assets/icons/Lock";
 import { useNavigate } from "react-router";
-import { apiRequest } from "@/utils/apiRequest";
-import { useQueryClient } from "@tanstack/react-query";
-import { USER_DETAILS } from "@/hooks/auth";
+// import { useQueryClient } from "@tanstack/react-query";
+// import { USER_DETAILS } from "@/hooks/auth";
 import { useAuth } from "../context/AuthContext";
+import { apiRequest } from "@/utils/apiRequest";
+import { USER_DETAILS } from "@/hooks/auth";
 
 const Login = () => {
-  const initialValues = { email: "gideon@gmail.com", password: "password" };
+  const initialValues = {
+    email: "abc1@sydani.org",
+    password: "numerator1@7121",
+  };
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
@@ -24,17 +28,18 @@ const Login = () => {
       .required("Password is required"),
   });
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const handleSubmit = async (values: any, { setFieldError }: any) => {
     try {
       const req = await apiRequest({
         method: "POST",
-        path: "/auth/sign-in",
+        path: "/api/method/slmctt.req.login",
         data: values,
       });
-      await queryClient.invalidateQueries({ queryKey: [USER_DETAILS] });
-      setUser(req.data.user);
+      await localStorage.setItem(USER_DETAILS, JSON.stringify(req));
+      // await queryClient.invalidateQueries({ queryKey: [USER_DETAILS] });
+      setUser(req);
       navigate("/dashboard");
     } catch (error: any) {
       if (error.message.includes("Account")) {
@@ -46,6 +51,49 @@ const Login = () => {
       console.log(error);
     }
   };
+  // const handdleSubmit = async (values: any, { setFieldError }: any) => {
+  //   try {
+  //     // Prepare FormData (multipart/form-data)
+  //     const formData = new FormData();
+  //     formData.append("email", values.email);
+  //     formData.append("password", values.password);
+
+  //     // Make the fetch request
+  //     const response = await fetch(
+  //       "https://slmctt.sydani.org/api/method/slmctt.req.login",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           // Authorization: "token f5aa952a551396980d:067d5d7f2b036ad6c7",
+  //           // Cookie:
+  //           //   "full_name=Numerator%20Uno; sid=f417605a8780e823bca4494d2f9998dfabe045eb3faa164de6aad56b; system_user=yes; user_id=abc1%40sydani.org; user_image=",
+  //         },
+  //         body: formData,
+  //       }
+  //     );
+
+  //     // Parse JSON response
+  //     const data = await response.json();
+  //     console.log(data);
+
+  //     if (!response.ok) {
+  //       throw new Error(data.message || "Login failed");
+  //     }
+
+  //     // Update app state
+  //     await queryClient.invalidateQueries({ queryKey: [USER_DETAILS] });
+  //     setUser(data.user);
+  //     navigate("/dashboard");
+  //   } catch (error: any) {
+  //     if (error.message.includes("Account")) {
+  //       setFieldError("email", error.message);
+  //     }
+  //     if (error.message.includes("password")) {
+  //       setFieldError("password", error.message);
+  //     }
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className="w-full h-screen gap-6 px-5 flex flex-col items-center justify-center">
